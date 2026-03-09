@@ -92,7 +92,7 @@ function AnimatedHeadline() {
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="max-w-7xl mx-auto relative group"
+      className="max-w-7xl mx-auto relative group py-12"
     >
       <div className="flex flex-col gap-4 relative">
         {/* Base Layer (Dimmed) */}
@@ -319,10 +319,13 @@ function ContactSection() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="py-60 bg-black flex flex-col items-center justify-center text-center px-6 relative overflow-hidden"
+      className="py-[234px] bg-black flex flex-col items-center justify-center text-center px-6 relative overflow-hidden contact-section"
     >
-      {/* Background Moving Marquee */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none overflow-hidden">
+      {/* Animated Neon Gradient Background — moves right→left */}
+      <div className="absolute inset-0 contact-gradient-bg pointer-events-none" />
+
+      {/* Ghost Background Text */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-[0.06] pointer-events-none select-none overflow-hidden">
         <motion.div
           animate={{ x: [0, -1000] }}
           transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
@@ -335,12 +338,13 @@ function ContactSection() {
       </div>
 
       <div className="relative z-10 w-full max-w-5xl">
+        {/* Heading */}
         <motion.div
           style={{ x: textX, y: textY }}
           className="mb-4"
         >
           <h2
-            className="text-[14vw] md:text-[10vw] font-bold leading-none tracking-tighter text-[#D4FF00] uppercase flex justify-center overflow-hidden"
+            className="text-[14vw] md:text-[10vw] font-bold leading-none tracking-tighter uppercase flex justify-center overflow-hidden contact-heading"
           >
             {title.split("").map((char, i) => (
               <motion.span
@@ -361,9 +365,10 @@ function ContactSection() {
           </h2>
         </motion.div>
 
+        {/* Email */}
         <motion.div
           style={{ x: useTransform(textX, (v) => v * 0.5), y: useTransform(textY, (v) => v * 0.5) }}
-          className="overflow-hidden mb-24"
+          className="overflow-hidden mb-18"
         >
           <motion.a
             href="mailto:hello@pentaclay.com"
@@ -377,7 +382,8 @@ function ContactSection() {
           </motion.a>
         </motion.div>
 
-        <div className="flex justify-center">
+        {/* Circular Contact Button */}
+        <div className="flex justify-center mt-16">
           <motion.div
             ref={buttonRef}
             style={{ x: springX, y: springY }}
@@ -385,10 +391,12 @@ function ContactSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ scale: 1.05 }}
             className="relative group cursor-pointer"
           >
             <motion.div
-              className="w-48 h-48 rounded-full border border-white/20 flex items-center justify-center relative overflow-hidden"
+              className="w-44 h-44 rounded-full border border-white/20 flex items-center justify-center relative overflow-hidden"
+              transition={{ duration: 0.25, ease: "easeOut" }}
             >
               <span className="text-xs font-bold uppercase tracking-[0.2em] flex items-center gap-2 relative z-20 group-hover:text-black transition-colors duration-500">
                 Contact <span className="text-xl">↗</span>
@@ -396,10 +404,10 @@ function ContactSection() {
 
               {/* Lime Dot */}
               <motion.div
-                className="absolute bottom-6 left-1/2 -translate-x-1/2 w-5 h-5 bg-[#D4FF00] rounded-full z-20"
+                className="absolute bottom-5 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#D6FF00] rounded-full z-20"
                 animate={{
-                  y: [0, -6, 0],
-                  scale: [1, 1.3, 1]
+                  y: [0, -5, 0],
+                  scale: [1, 1.25, 1]
                 }}
                 transition={{
                   duration: 2.5,
@@ -410,7 +418,7 @@ function ContactSection() {
 
               {/* Hover Fill */}
               <motion.div
-                className="absolute inset-0 bg-[#D4FF00] origin-bottom rounded-full"
+                className="absolute inset-0 bg-[#D6FF00] origin-bottom rounded-full"
                 initial={{ scaleY: 0 }}
                 whileHover={{ scaleY: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -420,25 +428,8 @@ function ContactSection() {
         </div>
       </div>
 
-      {/* Dynamic Background Glows */}
-      <motion.div
-        animate={{
-          x: [0, 100, -100, 0],
-          y: [0, -100, 100, 0],
-          scale: [1, 1.2, 0.8, 1]
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#D4FF00]/10 blur-[80px] rounded-full pointer-events-none glow-effect"
-      />
-      <motion.div
-        animate={{
-          x: [0, -150, 150, 0],
-          y: [0, 150, -150, 0],
-          scale: [1, 0.8, 1.2, 1]
-        }}
-        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-emerald-500/5 blur-[80px] rounded-full pointer-events-none glow-effect"
-      />
+      {/* Ambient Glow — central orb */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#6aff00]/10 blur-[100px] rounded-full pointer-events-none glow-effect" />
     </section>
   );
 }
@@ -759,7 +750,7 @@ export default function App() {
       {/* Header */}
       <header className="grid grid-cols-1 md:grid-cols-3 p-6 border-b border-white/10 text-[11px] uppercase tracking-widest font-medium">
         <div className="flex items-center">
-          <span className="text-lg font-bold tracking-tighter normal-case">Palmer®</span>
+          <span className="text-lg font-bold tracking-tighter normal-case">ascendqs</span>
         </div>
         <div className="hidden md:block">
           <p className="text-white/50 mb-1">Quick Links</p>
@@ -1420,41 +1411,6 @@ export default function App() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-500/5 blur-[80px] rounded-full pointer-events-none glow-effect" />
         </section>
 
-        {/* Floating Cards Section */}
-        <section className="bg-black py-24 border-t border-white/10 relative overflow-hidden min-h-[800px] flex flex-col">
-          <div className="px-6 md:px-12 flex justify-between items-center text-[10px] uppercase tracking-[0.2em] font-bold opacity-40 mb-12">
-            <span>© BRAND PARTNERS パートナー</span>
-            <span>(WDX® — 08)</span>
-            <span className="hidden md:block">CREATIVE DIRECTION</span>
-          </div>
-
-          <div className="flex-1 relative">
-            {[
-              { id: 1, img: "car-1", label: "", x: "20%", y: "10%", w: "300px", h: "150px", speed: 40 },
-              { id: 2, img: "manila-1", label: "Manila.", x: "70%", y: "5%", w: "250px", h: "350px", speed: -60 },
-              { id: 3, img: "sofa-1", label: "", x: "75%", y: "55%", w: "200px", h: "250px", speed: 30 },
-              { id: 4, img: "sunset-1", label: ".olzo", x: "60%", y: "70%", w: "280px", h: "200px", speed: -40 },
-              { id: 5, img: "house-1", label: ".olzo", x: "35%", y: "80%", w: "320px", h: "180px", speed: 50 },
-              { id: 6, img: "typewriter-1", label: "Analog", x: "10%", y: "40%", w: "220px", h: "280px", speed: -30 },
-              { id: 7, img: "mountain-1", label: "Peak", x: "45%", y: "15%", w: "180px", h: "240px", speed: 20 },
-              { id: 8, img: "ocean-1", label: "Deep", x: "85%", y: "30%", w: "240px", h: "180px", speed: -50 },
-              { id: 9, img: "forest-1", label: "Wild", x: "5%", y: "75%", w: "260px", h: "200px", speed: 60 },
-              { id: 10, img: "city-1", label: "Grid", x: "50%", y: "50%", w: "200px", h: "200px", speed: -25 },
-              { id: 11, img: "abstract-1", label: "Form", x: "30%", y: "5%", w: "150px", h: "150px", speed: 45 },
-              { id: 12, img: "portrait-2", label: "Soul", x: "80%", y: "80%", w: "180px", h: "260px", speed: -35 },
-              { id: 13, img: "architecture-1", label: "Structure", x: "15%", y: "60%", w: "280px", h: "160px", speed: 15 },
-              { id: 14, img: "minimal-1", label: "Less", x: "55%", y: "85%", w: "200px", h: "120px", speed: -45 },
-              { id: 15, img: "tech-1", label: "Future", x: "90%", y: "10%", w: "120px", h: "180px", speed: 55 },
-            ].map((card) => (
-              <Card
-                key={card.id}
-                {...card}
-                smoothX={smoothX}
-                smoothY={smoothY}
-              />
-            ))}
-          </div>
-        </section>
 
         {/* Social Links Bar */}
         <section className="border-y border-white/10 bg-black">
@@ -1504,82 +1460,3 @@ export default function App() {
   );
 }
 
-function Card({ img, label, x, y, w, h, speed, smoothX, smoothY }: any) {
-  const translateX = useTransform(smoothX, (v: number) => v * speed);
-  const translateY = useTransform(smoothY, (v: number) => v * speed);
-
-  const tiltX = useMotionValue(0);
-  const tiltY = useMotionValue(0);
-  const springTiltX = useSpring(tiltX, { damping: 25, stiffness: 200 });
-  const springTiltY = useSpring(tiltY, { damping: 25, stiffness: 200 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const { clientX, clientY, currentTarget } = e;
-    const { left, top, width, height } = currentTarget.getBoundingClientRect();
-    const x = (clientX - left) / width - 0.5;
-    const y = (clientY - top) / height - 0.5;
-    tiltX.set(y * 12);
-    tiltY.set(x * -12);
-  };
-
-  const handleMouseLeave = () => {
-    tiltX.set(0);
-    tiltY.set(0);
-  };
-
-  return (
-    <motion.div
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        left: x,
-        top: y,
-        width: w,
-        height: h,
-        x: translateX,
-        y: translateY,
-        rotateX: springTiltX,
-        rotateY: springTiltY,
-        transformStyle: "preserve-3d",
-      }}
-      animate={{
-        y: [0, -8, 0],
-      }}
-      transition={{
-        duration: 4 + Math.random() * 2,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      className="absolute rounded-2xl overflow-hidden bg-[#1a1a1a] shadow-2xl group cursor-pointer perspective-1000 will-change-transform"
-    >
-      <motion.div
-        style={{ transform: "translateZ(30px)" }}
-        className="w-full h-full relative"
-      >
-        <img
-          src={`https://picsum.photos/seed/${img}/400/400`}
-          alt={label || "Artistic visual"}
-          loading="lazy"
-          className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
-          referrerPolicy="no-referrer"
-        />
-        {/* Simplified Scanline Effect */}
-        <div className="absolute inset-0 bg-black/10 pointer-events-none opacity-20" />
-      </motion.div>
-      {label && (
-        <div
-          style={{ transform: "translateZ(60px)" }}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        >
-          <span className="text-white text-2xl font-bold tracking-tighter drop-shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            {label}
-          </span>
-        </div>
-      )}
-      <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
-    </motion.div>
-  );
-}

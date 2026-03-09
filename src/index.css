@@ -6,7 +6,8 @@
 }
 
 /* ===== Lenis Smooth Scroll ===== */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -24,10 +25,23 @@ html.lenis, html.lenis body {
 
 /* ===== Noise Texture — slowed for performance ===== */
 @keyframes noise {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  25% { transform: translate3d(-5%, -10%, 0); }
-  50% { transform: translate3d(-15%, 5%, 0); }
-  75% { transform: translate3d(7%, -25%, 0); }
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: translate3d(-5%, -10%, 0);
+  }
+
+  50% {
+    transform: translate3d(-15%, 5%, 0);
+  }
+
+  75% {
+    transform: translate3d(7%, -25%, 0);
+  }
 }
 
 .animate-noise {
@@ -38,20 +52,26 @@ html.lenis, html.lenis body {
 
 /* ===== Liquid Gradient ===== */
 @keyframes liquid-flow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .animate-liquid {
-  background: linear-gradient(
-    135deg,
-    #0ea5e9,
-    #10b981,
-    #14b8a6,
-    #2dd4bf,
-    #0ea5e9
-  );
+  background: linear-gradient(135deg,
+      #0ea5e9,
+      #10b981,
+      #14b8a6,
+      #2dd4bf,
+      #0ea5e9);
   background-size: 300% 300%;
   animation: liquid-flow 12s ease-in-out infinite;
   will-change: background-position;
@@ -63,8 +83,13 @@ html.lenis, html.lenis body {
 
 /* ===== Marquee — GPU accelerated ===== */
 @keyframes marquee {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-50%, 0, 0); }
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 .animate-marquee {
@@ -96,19 +121,23 @@ html.lenis, html.lenis body {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: #000;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #333;
   border-radius: 10px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
 
 /* ===== Reduced Motion — disable heavy animations ===== */
 @media (prefers-reduced-motion: reduce) {
+
   .animate-noise,
   .animate-marquee,
   .animate-liquid,
@@ -131,4 +160,39 @@ html.lenis, html.lenis body {
   .glow-effect {
     display: none !important;
   }
+}
+
+/* ===== Contact Section Redesign ===== */
+.contact-heading span {
+  color: #D6FF00;
+  transition: color 0.4s ease-out;
+}
+
+.contact-section:hover .contact-heading span {
+  color: #FFEE00;
+  /* Bright yellow on hover */
+}
+
+@keyframes contact-gradient-move {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.contact-gradient-bg {
+  /* Very wide background to allow seamless panning */
+  width: 200%;
+  left: 0;
+  background: linear-gradient(90deg,
+      rgba(20, 255, 0, 0.05) 0%,
+      rgba(214, 255, 0, 0.08) 25%,
+      rgba(20, 255, 0, 0.05) 50%,
+      rgba(214, 255, 0, 0.08) 75%,
+      rgba(20, 255, 0, 0.05) 100%);
+  animation: contact-gradient-move 12s linear infinite;
+  will-change: transform;
 }
